@@ -60,11 +60,16 @@ const useAuthProvider = () => {
       getUserAdditionalData(user)
     }
   }
+  const signOut = async () => {
+    await auth.signOut()
 
+    return setUser(false)
+  }
   return {
     user,
     signUp,
     signIn,
+    signOut,
   }
 }
 export default useAuthProvider
