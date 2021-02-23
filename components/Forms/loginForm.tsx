@@ -1,14 +1,21 @@
 import { useForm } from "react-hook-form"
+import { useAuth } from "../../hooks/useAuth"
+import { useRouter } from "next/router"
 
-interface SignUpData {
+interface LoginData {
   email: string
   password: string
 }
+
 const LoginForm: React.FC = () => {
   const { register, errors, handleSubmit } = useForm()
+  const auth = useAuth()
+  const router = useRouter()
 
-  const onSubmit = (data: SignUpData) => {
-    console.log(data)
+  const onSubmit = (data: LoginData) => {
+    return auth.signIn(data).then(() => {
+      router.push("/account")
+    })
   }
 
   const reCorto: RegExp = /\S+@\S+\.\S+/

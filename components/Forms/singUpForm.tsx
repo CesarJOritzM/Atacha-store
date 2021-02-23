@@ -1,6 +1,12 @@
 import { useForm } from "react-hook-form"
-import { useAuth } from "../../hooks/useAuthProvider"
+import { useAuth } from "../../hooks/useAuth"
 import { useRouter } from "next/router"
+
+interface SingUpData {
+  name: string
+  email: string
+  password: string
+}
 
 const SignUpForm: React.FC = () => {
   const auth = useAuth()
@@ -8,7 +14,7 @@ const SignUpForm: React.FC = () => {
 
   const { register, errors, handleSubmit } = useForm()
 
-  const onSubmit = (data: [string]) => {
+  const onSubmit = (data: SingUpData) => {
     return auth.signUp(data).then((user: any) => {
       console.log(user)
       router.push("/login")
